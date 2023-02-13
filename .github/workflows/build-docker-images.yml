@@ -35,7 +35,7 @@ jobs:
       run: make IMAGE_PREFIX=quay.io/opsmxpublic/ clean images image-names
     - name: Send custom JSON data to Slack workflow
       id: slack
-      uses: slackapi/slack-github-action@v1.18.0
+      uses: slackapi/slack-github-action@v1.23.0
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_BUILD_EVENTS_WEBHOOK_URL }}
       with:
