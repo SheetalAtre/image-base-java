@@ -1,13 +1,13 @@
-all: multiarch
+all: images
 
-IMAGE_BASE=docker.flame.org/library
+IMAGE_BASE=quay.io/opsmxpublic/
 
-multiarch: set-git-info
+images: set-git-info
 	docker buildx build \
 	    --pull \
 	    --platform linux/amd64,linux/arm64 \
-			-t ${IMAGE_BASE}/image-base-java-ubi8-minimal:latest \
-			-t ${IMAGE_BASE}/image-base-java-ubi8-minimal:${GIT_BRANCH} . \
+			-t ${IMAGE_BASE}image-base-java-ubi8-minimal:latest \
+			-t ${IMAGE_BASE}image-base-java-ubi8-minimal:${GIT_BRANCH} . \
 			--push
 
 #
@@ -16,3 +16,8 @@ multiarch: set-git-info
 set-git-info:
 	@$(eval GIT_BRANCH=$(shell git describe --tags))
 	@$(eval GIT_HASH=$(shell git rev-parse ${GIT_BRANCH}))
+
+clean:
+
+image-names: set-git-info
+	@echo ${IMAGE_BASE}/image-base-java-ubi8-minimal:latest,  ${IMAGE_BASE}/image-base-java-ubi8-minimal:${GIT_BRANCH}
