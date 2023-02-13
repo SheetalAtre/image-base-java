@@ -20,4 +20,4 @@ set-git-info:
 clean:
 
 image-names: set-git-info
-	@echo ${IMAGE_BASE}/image-base-java-ubi8-minimal:latest,  ${IMAGE_BASE}/image-base-java-ubi8-minimal:${GIT_BRANCH}
+	[ -n "${GITHUB_OUTPUT}" ] && echo imageNames=${IMAGE_BASE}image-base-java-ubi8-minimal:latest, ${IMAGE_BASE}image-base-java-ubi8-minimal:${GIT_BRANCH} >> ${GITHUB_OUTPUT}
