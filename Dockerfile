@@ -6,6 +6,7 @@ ARG OPSMXUSER=1001
 
 RUN microdnf update \
     && microdnf install --setopt=tsflags=nodocs curl ca-certificates ${JAVA_PACKAGE} \
+    && microdnf remove platform-python-pip \
     && microdnf clean all
 
 ENV WORK_DIR=/opsmx/workdir \
